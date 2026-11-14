@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Discord Embed builder</title>
+<meta name="description" content="Build a Discord component link embed: add text, images and button emojis, preview it live, and copy the finished HTML.">
+
+<meta property="og:title" content="Discord Embed builder">
+<meta property="og:description" content="Add text, images and button emojis by name and ID. The preview updates
+as you type, and the finished HTML is ready to copy at the bottom.">
+<meta property="og:image" content="https://github.com/ItzMeShadow999/My-assets/blob/main/Discord-Embed.png?raw=true">
+<meta name="theme-color" content="#2b2d31">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='2' y='5' width='28' height='22' rx='4' fill='%231b1a19' stroke='%23413f3b'/><path d='M7 5H6a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h1z' fill='%238cc4ea'/><rect x='11' y='9' width='13' height='4.5' rx='2.25' fill='%23ecebe8'/><rect x='11' y='16.5' width='16' height='3' rx='1.5' fill='%233d3b37'/><rect x='11' y='21.5' width='11' height='3' rx='1.5' fill='%233d3b37'/></svg>">
+<link rel="stylesheet" href="style.css">
+
+<script id="discord:component-embed" type="application/json">
+{
+  "component": {
+    "type": 17,
+    "accent_color": 2829617,
+    "components": [
+      {
+        "type": 9,
+        "components": [
+          {
+            "type": 10,
+            "content": "# Discord Embed builder\nAdd text, images and button emojis by name and ID. The preview updates\nas you type, and the finished HTML is ready to copy at the bottom."
+          }
+        ],
+        "accessory": {
+          "type": 11,
+          "media": {
+            "url": "https://github.com/ItzMeShadow999/My-assets/blob/main/Discord-Embed-builder.png?raw=true"
+          }
+        }
+      },
+      {
+        "type": 14,
+        "divider": true,
+        "spacing": 1
+      },
+      {
+        "type": 1,
+        "components": [
+          {
+            "type": 2,
+            "style": 5,
+            "url": "https://example.com/",
+            "label": "Visit Site"
+          }
+        ]
+      }
+    ]
+  }
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+<header class="top reveal">
+<div class="embed-head"><h1>Discord Embed builder</h1>
+<div class="lines">
+<div class="skels" aria-hidden="true"><span class="sk a"></span><span class="sk b"></span></div>
+<p class="lede"><span class="ln"><span class="w" style="--i:0">Add</span> <span class="w" style="--i:1">text,</span> <span class="w" style="--i:2">images</span> <span class="w" style="--i:3">and</span> <span class="w" style="--i:4">button</span> <span class="w" style="--i:5">emojis</span> <span class="w" style="--i:6">by</span> <span class="w" style="--i:7">name</span> <span class="w" style="--i:8">and</span> <span class="w" style="--i:9">ID.</span> <span class="w" style="--i:10">The</span> <span class="w" style="--i:11">preview</span> <span class="w" style="--i:12">updates</span></span><span class="ln"><span class="w" style="--i:13">as</span> <span class="w" style="--i:14">you</span> <span class="w" style="--i:15">type,</span> <span class="w" style="--i:16">and</span> <span class="w" style="--i:17">the</span> <span class="w" style="--i:18">finished</span> <span class="w" style="--i:19">HTML</span> <span class="w" style="--i:20">is</span> <span class="w" style="--i:21">ready</span> <span class="w" style="--i:22">to</span> <span class="w" style="--i:23">copy</span> <span class="w" style="--i:24">at</span> <span class="w" style="--i:25">the</span> <span class="w" style="--i:26">bottom.</span></span></p>
+</div></div>
+<div class="share"><button class="alt sm" id="cl" type="button">Copy link</button><button class="alt sm" id="ci" type="button">Copy invisible link</button></div>
+</header>
+
+<main id="main" class="grid">
+<div>
+
+<section class="card reveal" aria-labelledby="h-text">
+<h2 id="h-text"><span class="tag t-blue">01</span>Text</h2>
+<label class="f" for="title">Title</label>
+<input id="title" placeholder="Embed title">
+<label class="f" for="desc">Description</label>
+<textarea id="desc" placeholder="Embed description"></textarea>
+<label class="f" for="extra">Extra text (optional, shows under the divider)</label>
+<textarea id="extra" placeholder="**Bold**, line breaks and # headings work"></textarea>
+<label class="f" for="thumb">Side thumbnail image URL (optional)</label>
+<input id="thumb" placeholder="https://host.com/small.png">
+<label class="chk"><input type="checkbox" id="div" checked> Divider before the buttons</label>
+</section>
+
+<section class="card reveal" aria-labelledby="h-img">
+<h2 id="h-img"><span class="tag t-green">02</span>Images</h2>
+<div class="empty" id="imgempty"><strong>No images yet</strong><span>Add up to 4 and choose where each one sits.</span></div>
+<div id="imglist"></div>
+<button class="alt" id="addimg" type="button">Add image</button>
+<div class="msg" id="m-img" aria-live="polite"></div>
+<div class="small">Each needs a direct image link ending in .png .jpg .jpeg .gif .webp or .avif.</div>
+</section>
+
+<section class="card reveal" aria-labelledby="h-btn">
+<h2 id="h-btn"><span class="tag t-yellow">03</span>Buttons and emojis</h2>
+<div class="empty" id="btnempty"><strong>No buttons yet</strong><span>Add up to 5 link buttons, each with an optional emoji.</span></div>
+<div id="btnlist"></div>
+<button class="alt" id="addbtn" type="button">Add button</button>
+<div class="msg" id="m-btn" aria-live="polite"></div>
+<div class="small">Each emoji needs a name and an ID. To get them, type <code>```</code> in the Discord chat box, then pick your emoji. When you click it, it shows up as <code>```&lt;:name:id&gt;</code>. Paste that whole thing as it is, or just the <code>&lt;:name:id&gt;</code> part, into the emoji name box and it splits into name and ID for you. Leave the label empty for an emoji-only button.</div>
+</section>
+
+<section class="card reveal" aria-labelledby="h-col">
+<h2 id="h-col"><span class="tag t-red">04</span>Colors and fallback tags</h2>
+<div class="swatches">
+<div><label class="f" for="accent">Accent</label><input type="color" id="accent" value="#2b2d31"></div>
+<div><label class="f" for="theme">Theme</label><input type="color" id="theme" value="#2b2d31"></div>
+</div>
+<label class="f" for="og">Fallback image (og:image, for clients without component embeds)</label>
+<input id="og" placeholder="https://host.com/banner.png">
+<label class="chk"><input type="checkbox" id="redir"> Redirect visitors to the first button's link</label>
+</section>
+
+</div>
+
+<aside class="side" aria-label="Preview and output">
+<section class="card reveal" aria-labelledby="h-prev">
+<div class="head">
+<h2 id="h-prev"><span class="tag t-blue">05</span>Live preview</h2>
+<button class="alt swap" id="swap" type="button" hidden><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13V3M2.5 5.5 5 3l2.5 2.5M11 3v10M8.5 10.5 11 13l2.5-2.5"/></svg><span id="swaplabel">Check fallback embed</span></button>
+</div>
+<div class="stage">
+<div class="pane" id="pane-discord"><div class="cv2" id="card"></div></div>
+<div class="pane off" id="pane-fb"><div class="fb" id="fb"></div></div>
+</div>
+<div class="small" id="sizetxt" aria-live="polite"></div>
+<div class="meter"><i id="bar"></i></div>
+<div class="small">Discord limits the embed payload to 3000 bytes. The preview approximates the look and is not Discord's exact rendering.</div>
+</section>
+
+<section class="card reveal" aria-labelledby="h-out">
+<h2 id="h-out"><span class="tag t-green">06</span>Your HTML</h2>
+<pre class="code" id="outhl" tabindex="0" aria-label="Generated HTML"><code id="outcode"></code></pre>
+<textarea id="out" class="sr-only" readonly spellcheck="false" tabindex="-1" aria-hidden="true"></textarea>
+<div class="row mt">
+<button id="copy" type="button">Copy code</button>
+<button class="alt" id="dl" type="button">Download index.html</button>
+</div>
+<div class="small">Upload this as index.html to any static host, then post the page URL in Discord. Add <code>?v=1</code>, <code>?v=2</code> and so on while testing to get past Discord's cache.</div>
+</section>
+</aside>
+</main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
